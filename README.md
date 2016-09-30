@@ -1,6 +1,15 @@
 # Fab Lab Door Project Notes
 
 # Summary
+Steps for building the project:
+1. Clone the repository (via git)
+2. Navigate to the directory RFID_Web
+3. Type `mvn package`
+4. To run the code, type: `java -jar target/rfid-web-0.1.0.jar`
+5. Launch the following url:
+http://localhost:8080/test/Chris?isExcited=y
+6. You can test omitting the parameter as well:
+http://localhost:8080/test/Chris
 
 # Components
 
