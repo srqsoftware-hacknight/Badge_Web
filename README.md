@@ -1,7 +1,9 @@
 # Fab Lab Door Project Notes
 
 # Prerequisites
+
 There are a few packages that you should have installed before attempting to work on the project:
+
 1. `Node.js` - The NodeJS runtime
 2. `npm` - NodeJS package manager; used to install project dependencies
 3. `maven` - Java build tool and package manager
@@ -12,7 +14,9 @@ There are a few packages that you should have installed before attempting to wor
 If you're using a Mac, the best way to install the prerequisites is via brew. On Linux, apt-get should be able to install them as well.
 
 # Summary
+
 Steps for building the project:
+
 1. Clone the repository (via git)
 2. Navigate to the directory RFID_Web
 3. Install bower and npm related dependencies.
