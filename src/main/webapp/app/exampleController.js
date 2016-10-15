@@ -1,9 +1,14 @@
 angular.module('fabLab.exampleCtrl',[])
 
   // Angular auto-injects the scope for this controller
-  .controller('ExampleController', function($scope, exampleService) {
-    console.log("Example Controller");
+  .controller('ExampleController', function($scope, $location, exampleService) {
 
+    $scope.navToUsers = function() {
+    	console.log("Navigation");
+    	$location.path( "users" );
+    };
+
+    
     $scope.devices = [
       {"id": "123", "isEnabled": true, "owner": "Scott"},
       {"id": "456", "isEnabled": true, "owner": "Chris"},
@@ -15,6 +20,7 @@ angular.module('fabLab.exampleCtrl',[])
     $scope.echoContent = function(echoText) {
       var x = exampleService.echo(echoText);
       alert(x);
-    }
+    };
+    
 
   });

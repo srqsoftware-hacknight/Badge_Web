@@ -15,7 +15,7 @@ public class RfidControllerTest {
 		ResponseEntity<String> re = rc.getRfidStatus(1234);
 		
 		assertEquals(re.getStatusCode(), HttpStatus.UNAUTHORIZED);
-		assertEquals(re.getBody(), "deny");
+		assertEquals(re.getBody(), "{\"response\": \"deny\"}");
 	}
 
 	@Test
@@ -25,7 +25,7 @@ public class RfidControllerTest {
 		ResponseEntity<String> re = rc.getRfidStatus(1234);
 		
 		assertEquals(re.getStatusCode(), HttpStatus.OK);
-		assertEquals(re.getBody(), "accept");
+		assertEquals(re.getBody(), "{\"response\": \"accept\"}");
 	}
 	
 

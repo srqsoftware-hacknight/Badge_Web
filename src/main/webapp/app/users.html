@@ -1,0 +1,21 @@
+<div class="">
+<md-content>
+	<div>This is new, yo!</div>
+	
+	<form name="userForm">
+			<div class="form-group">
+				<label for="firstName">First Name:</label>
+				<input ng-model="user.firstName" type="text" class="form-control" id="firstName">
+			</div>
+			<div class="form-group">
+				<label for="lastName">Last Name:</label>
+				<input ng-model="user.lastName" type="text" class="form-control" id="lastName">
+			</div>
+			<div class="form-group">
+				<label for="rfidId">RFID Card Number:</label>
+				<input ng-model="user.rfidId" type="text" class="form-control" id="rfidId">
+			</div>
+          <p><button ng-click="addUser()">Add User</button></p>
+	</form>
+</md-content>
+</div>
