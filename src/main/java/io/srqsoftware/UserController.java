@@ -1,5 +1,7 @@
 package io.srqsoftware;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,5 +48,12 @@ public class UserController {
 			return new ResponseEntity<String>("{\"response\": \""+e.getLocalizedMessage()+"\"}", HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
+	
+  @RequestMapping("/list")
+  public ResponseEntity<List<User>> listUsers() {
+    	List<User> Temp = us.getAllUsers();
+		return new ResponseEntity<List<User>>(Temp, HttpStatus.OK);
+    }
+  
 	
 }

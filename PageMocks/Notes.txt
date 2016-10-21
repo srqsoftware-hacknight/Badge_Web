@@ -1,0 +1,7 @@
+Curl command to insert user from a DOS command window
+curl --header "Content-Type:application/json" --data "{"""rfidId""":"""54321""","""firstName""":"""Richard""","""lastName""":"""Murray"""}" http://localhost:8080/users
+
+JSON parameter string to insert a user
+{"rfidId":"11111", "firstName":"John","lastName":"Public"}
+
+Default name of H2 database jdbc:h2:mem:testdb, user is sa
