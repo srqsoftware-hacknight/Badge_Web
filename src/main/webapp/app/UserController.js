@@ -18,12 +18,14 @@ angular.module('fabLab.UserCtrl',[])
     };
     
     
+    
     $scope.addUser = function() {
-    	$http.post("/users", $scope.user)
+    	$http({"method": "POST", "url":"/users", "data": $scope.user, "withCredentials":true})
         .then(function(res) {
         	$scope.showResults("User was successfully added");
         	$scope.user = {};
         }, function(err) {
+        	console.log("Bad user add: " + JSON.stringify(err));
         	$scope.showResults("Error adding the user: " + err.data.response);
         }
       );

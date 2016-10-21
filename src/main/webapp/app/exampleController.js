@@ -29,9 +29,19 @@ angular.module('fabLab.exampleCtrl',[])
 */
     // A simplistic example of calling a service from a controller
     $scope.echoContent = function(echoText) {
-      var x = exampleService.echo(echoText);
+      var x = exampleService.echo(echoText); 
       alert(x);
     };
-    
+
+    $scope.logUserOut = function() { 
+    	$http({"method":"POST", "headers": {'Content-Type': 'application/x-www-form-urlencoded'}, "url":"/logout", "data": ""})
+    	
+        .then(function(res) {
+        	console.log("User was logged out");
+        	$location.path("users")
+        }, function(err) {
+        	console.log("Error logging out: " + JSON.stringify(err.data.response));
+        })
+    };
 
   });
