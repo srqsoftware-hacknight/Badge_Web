@@ -17,7 +17,7 @@ public class DefaultRfidAuthorizationService implements RfidAuthorizationService
 	@Override
 	public int getAuthorizationStatus(int keyId) {
 		try {
-			String query = "select user_id, rfid_id, timestamp, firstname, lastname from user where status=1 AND rfid_id=?";
+			String query = "select user_id, rfid_id, timestamp, firstname, lastname, status from user where status=1 AND rfid_id=?";
 			String sKeyId = ""+keyId;
 			User u = jdbcTemplate.queryForObject(query, new Object[] {sKeyId}, new UserRowMapper());
 			return (u != null) ? AUTHORIZED : UNAUTHORIZED;
