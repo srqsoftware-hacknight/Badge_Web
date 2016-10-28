@@ -1,9 +1,9 @@
-var app = angular.module('ExampleApplication', ['ngRoute', 'ngMaterial', 'fabLab.exampleCtrl', 'fabLab.UserCtrl', 'fabLab.AuthenticationController', 'fabLab.exampleSvc']);
+var app = angular.module('RfidApplication', ['ngRoute', 'ngMaterial', 'fabLab.rfidCtrl', 'fabLab.UserCtrl', 'fabLab.AuthenticationController']);
 
 app.config(function($routeProvider) {
-  $routeProvider.when("/example", 
-      {"templateUrl": "app/example.html",
-       "controller" : "ExampleController"
+  $routeProvider.when("/rfid", 
+      {"templateUrl": "app/rfid.html",
+       "controller" : "RfidController"
       });
 
   $routeProvider.when("/authentication", 
@@ -18,7 +18,9 @@ app.config(function($routeProvider) {
 	      });
 
   $routeProvider.otherwise(
-    {"templateUrl": "app/example.html",
-     "controller" : "ExampleController"
+    {"templateUrl": "app/rfid.html",
+     "controller" : "RfidController"
     });
 });
+
+app.userName = "Happy";

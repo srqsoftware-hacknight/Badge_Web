@@ -2,7 +2,7 @@
 <html lang="en">
 
   <head>
-    <title>This is an example title</title>
+    <title>Mouse Door</title>
 
     <!-- Support Mobile Responsiveness -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,33 +28,31 @@
     <script type="text/javascript" src="app/app.js"></script>
 
     <!-- Load any necessary services -->
-    <script type="text/javascript" src="app/exampleService.js"></script>
 
     <!-- Load any necessary controllers -->
-    <script type="text/javascript" src="app/exampleController.js"></script>
+    <script type="text/javascript" src="app/RfidController.js"></script>
     <script type="text/javascript" src="app/UserController.js"></script>
     <script type="text/javascript" src="app/AuthenticationController.js"></script>
+
+    <link rel="stylesheet" href="style.css">
 
   <meta name="viewport" content="initial-scale=1" />
 
   </head>
 
-  <body ng-app="ExampleApplication">
+  <body ng-app="RfidApplication">
 
     <div class="jumbotron text-center">
-      Page Title Goes Here
+      <h1>RFID Mouse Trap</h1>
     </div>
 
-      <div class="row">
-        <div class="col-md-6">
-          <p>This is an example of text in a large left column</p>
-        </div>
-        <div class="col-md-6">
-          <p class="text-primary">And this is another medium column with primary text.</p>
-        </div>
-      </div>
+    <div>
+    <span class="user-details">Hello, {{username}}!<br/><a ng-click="navToAuth()">Log In</a></span>
+    </div>
 
-    <ng-view/>
+    <div>
+      <ng-view/>
+    </div>
 
     </div>
 

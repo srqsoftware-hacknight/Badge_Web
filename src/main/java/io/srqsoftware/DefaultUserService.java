@@ -31,10 +31,11 @@ public class DefaultUserService implements UserService {
 		                @Override
 		                public PreparedStatement createPreparedStatement(Connection connection)
 		                        throws SQLException {
-		                    PreparedStatement ps = connection.prepareStatement("insert into user(RFID_ID, FIRSTNAME, LASTNAME) values(?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+		                    PreparedStatement ps = connection.prepareStatement("insert into user(RFID_ID, FIRSTNAME, LASTNAME, STATUS) values(?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 		                    ps.setString(1, x.getRfidId());
 		                    ps.setString(2, x.getFirstName());
 		                    ps.setString(3, x.getLastName());
+		                    ps.setInt(4, x.getStatus());
 		                    return ps;
 		                }
 		            }, holder);
@@ -47,5 +48,11 @@ public class DefaultUserService implements UserService {
 	public List<User> getAllUsers() {
 		String query = "select * from user order by lastname";		
 		return jdbcTemplate.query(query, new UserRowMapper());
+	}
+
+	@Override
+	public void updateUser(User x) {
+		String query = "update user set status = ? where user_id = ?";		
+		jdbcTemplate.update(query, x.getStatus(), x.getUserId());
 	}
 }

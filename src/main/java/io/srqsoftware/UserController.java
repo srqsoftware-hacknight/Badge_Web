@@ -34,6 +34,19 @@ public class UserController {
 		return true;
 	}
 
+	@RequestMapping(method=RequestMethod.PUT)
+	public ResponseEntity<String> updateUserStatus(@RequestBody User user) {
+		if (!isValidUser(user)) {
+			return new ResponseEntity<String>("{\"response\": \"required parameter missing\"}", HttpStatus.NOT_ACCEPTABLE);
+		}
+		try {
+			us.updateUser(user);
+			return new ResponseEntity<String>("{\"response\": \""+user.getUserId()+"\"}", HttpStatus.ACCEPTED);
+		} catch(Exception e) {
+			return new ResponseEntity<String>("{\"response\": \""+e.getLocalizedMessage()+"\"}", HttpStatus.NOT_ACCEPTABLE);
+		}
+	}
+	
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<String> addUser(@RequestBody User user) {
 		// Require first name, last name, and the RFID identifier
@@ -41,7 +54,6 @@ public class UserController {
 			return new ResponseEntity<String>("{\"response\": \"required parameter missing\"}", HttpStatus.NOT_ACCEPTABLE);
 		}
 		try {
-			System.out.println(user);
 			long resp = us.createUser(user);
 			return new ResponseEntity<String>("{\"response\": \""+resp+"\"}", HttpStatus.CREATED);
 		} catch(Exception e) {

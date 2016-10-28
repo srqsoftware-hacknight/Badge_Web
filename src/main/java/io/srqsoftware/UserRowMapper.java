@@ -15,6 +15,7 @@ public class UserRowMapper implements RowMapper<User> {
 		u.setTimestamp(new Date(rs.getTimestamp("timestamp").getTime()));
 		u.setFirstName(rs.getString("firstname"));
 		u.setLastName(rs.getString("lastname"));
+		u.setStatus(rs.getInt("status"));
 		return u;
 	}
 }

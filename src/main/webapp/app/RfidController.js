@@ -1,7 +1,16 @@
-angular.module('fabLab.exampleCtrl',[])
+angular.module('fabLab.rfidCtrl',[])
 
   // Angular auto-injects the scope for this controller
-  .controller('ExampleController', function($scope, $location, $http, exampleService) {
+  .controller('RfidController', function($scope, $location, $http, $mdToast) {
+
+    $scope.showResults = function(txt) {
+    	
+    	$mdToast.show(
+    			$mdToast.simple()
+    				.textContent(txt)
+    				.position('top left')
+    				.hideDelay(2000));
+    };
 
     $scope.navToUsers = function() {
     	console.log("Navigation");
@@ -27,10 +36,24 @@ angular.module('fabLab.exampleCtrl',[])
       {"id": "987", "isEnabled": true, "owner": "Eric"},
     ];
 */
-    // A simplistic example of calling a service from a controller
-    $scope.echoContent = function(echoText) {
-      var x = exampleService.echo(echoText); 
-      alert(x);
+
+    $scope.updateUser = function(x) {
+      // Toggle the status of the user
+      if (x.status == 1) {
+        x.status = 0;
+      } else {
+        x.status = 1;
+      }
+
+    	$http({"method": "PUT", "url":"/users", "data": x, "withCredentials":true})
+        .then(function(res) {
+        	$scope.showResults("User was successfully updated");
+          $scope.loadData();
+        }, function(err) {
+        	console.log("Bad user update: " + JSON.stringify(err));
+        	$scope.showResults("Error adding the user: " + err.data.response);
+        }
+      );
     };
 
     $scope.logUserOut = function() { 
@@ -41,7 +64,7 @@ angular.module('fabLab.exampleCtrl',[])
         	$location.path("users")
         }, function(err) {
         	console.log("Error logging out: " + JSON.stringify(err.data.response));
-        })
+        });
     };
 
   });
