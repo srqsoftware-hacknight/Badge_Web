@@ -10,12 +10,11 @@ public class UserRowMapper implements RowMapper<User> {
 	@Override
 	public User mapRow(ResultSet rs, int idx) throws SQLException {
 		User u = new User();
-		u.setUserId(rs.getInt("user_id"));
 		u.setRfidId(rs.getString("rfid_id"));
-		u.setTimestamp(new Date(rs.getTimestamp("timestamp").getTime()));
-		u.setFirstName(rs.getString("firstname"));
-		u.setLastName(rs.getString("lastname"));
-		u.setStatus(rs.getInt("status"));
+		u.setFirstName(rs.getString("first_name"));
+		u.setLastName(rs.getString("last_name"));
+		u.setTimestamp(rs.getTimestamp("issued_date") != null ? new Date(rs.getTimestamp("issued_date").getTime()) : null);
+
 		return u;
 	}
 }

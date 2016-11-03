@@ -14,7 +14,7 @@ public class User {
 	
 	private Date timestamp;
 	public Date getTimestamp() { return timestamp; }
-	public void setTimestamp(Date timestamp) { this.timestamp = new Date(timestamp.getTime()); }
+	public void setTimestamp(Date timestamp) { this.timestamp = timestamp != null ? new Date(timestamp.getTime()) : null; }
 	
 	private String firstName;
 	public String getFirstName() { return firstName; }

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,28 +32,30 @@ public class DefaultUserService implements UserService {
 		                @Override
 		                public PreparedStatement createPreparedStatement(Connection connection)
 		                        throws SQLException {
-		                    PreparedStatement ps = connection.prepareStatement("insert into user(RFID_ID, FIRSTNAME, LASTNAME, STATUS) values(?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+		                    PreparedStatement ps = connection.prepareStatement("insert into badges(RFID_ID, FIRST_NAME, LAST_NAME) values(?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 		                    ps.setString(1, x.getRfidId());
 		                    ps.setString(2, x.getFirstName());
 		                    ps.setString(3, x.getLastName());
-		                    ps.setInt(4, x.getStatus());
 		                    return ps;
 		                }
 		            }, holder);
 
-		Long newUserId = holder.getKey().longValue();
-		return newUserId;
+		return holder.getKey().longValue();
 	}
 
 	@Override
 	public List<User> getAllUsers() {
-		String query = "select * from user order by lastname";		
+		String query = "select * from badges order by last_name";
 		return jdbcTemplate.query(query, new UserRowMapper());
 	}
 
 	@Override
 	public void updateUser(User x) {
-		String query = "update user set status = ? where user_id = ?";		
-		jdbcTemplate.update(query, x.getStatus(), x.getUserId());
+		// todo: copy other nullable values, make transactional
+		String archiveQuery = "insert into badges_history(return_date, rfid_id) values (?, ?)";
+		jdbcTemplate.update(archiveQuery, new Date(), x.getRfidId());
+
+		String query = "delete from badges where rfid_id = ?";
+		jdbcTemplate.update(query, x.getRfidId());
 	}
 }

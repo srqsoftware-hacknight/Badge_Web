@@ -1,1 +1,1 @@
-insert into user(RFID_ID, FIRSTNAME, LASTNAME, STATUS) values('12345', 'Chris', 'James', 0);
+insert into badges(RFID_ID, FIRST_NAME, LAST_NAME) values('12345', 'Chris', 'James');
