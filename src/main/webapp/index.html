@@ -2,7 +2,7 @@
 <html lang="en">
 
   <head>
-    <title>Mouse Door</title>
+    <title>Suncoast Science Center Badge System</title>
 
     <!-- Support Mobile Responsiveness -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,8 +30,7 @@
     <!-- Load any necessary services -->
 
     <!-- Load any necessary controllers -->
-    <script type="text/javascript" src="app/RfidController.js"></script>
-    <script type="text/javascript" src="app/UserController.js"></script>
+    <script type="text/javascript" src="app/BadgeController.js"></script>
     <script type="text/javascript" src="app/AuthenticationController.js"></script>
 
     <link rel="stylesheet" href="style.css">
@@ -40,14 +39,14 @@
 
   </head>
 
-  <body ng-app="RfidApplication">
+  <body ng-app="BadgeApplication">
 
     <div class="jumbotron text-center">
-      <h1>RFID Mouse Trap</h1>
+      <h1>Suncoast Science Center Badge System</h1>
     </div>
 
     <div>
-    <span class="user-details">Hello, {{username}}!<br/><a ng-click="navToAuth()">Log In</a></span>
+    <span class="badge-details">Hello, {{username}}!<br/><a ng-click="navToAuth()">Log In</a></span>
     </div>
 
     <div>

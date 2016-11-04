@@ -1,13 +1,10 @@
 angular.module('fabLab.AuthenticationController',[])
-
-  // Angular auto-injects the scope for this controller
   .controller('AuthenticationController', function($scope, $http, $location, $mdToast) {
     console.log("Auth ctrl");
     $scope.username = "";
     $scope.password = "";
 
     $scope.showResults = function(txt) {
-    	
     	$mdToast.show(
     			$mdToast.simple()
     				.textContent(txt)
@@ -21,9 +18,9 @@ angular.module('fabLab.AuthenticationController',[])
         .then(function(res) {
         	$scope.showResults("User was authenticated");
           console.log($scope.username);
-        	$location.path("rfid");
+        	$location.path("badges");
         }, function(err) {
-        	$scope.showResults("Error authenticating user: " + err.data.response);
+        	$scope.showResults("User authentication failed");
         }
       );
     };
@@ -31,6 +28,4 @@ angular.module('fabLab.AuthenticationController',[])
     $scope.navToAuth = function() {
       $location.path("authentication");
     };
-    
-
   });

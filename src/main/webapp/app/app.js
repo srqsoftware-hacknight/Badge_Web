@@ -1,26 +1,23 @@
-var app = angular.module('RfidApplication', ['ngRoute', 'ngMaterial', 'fabLab.rfidCtrl', 'fabLab.UserCtrl', 'fabLab.AuthenticationController']);
+var app = angular.module('BadgeApplication', ['ngRoute', 'ngMaterial', 'fabLab.BadgeController', 'fabLab.AuthenticationController']);
 
 app.config(function($routeProvider) {
-  $routeProvider.when("/rfid", 
-      {"templateUrl": "app/rfid.html",
-       "controller" : "RfidController"
-      });
-
   $routeProvider.when("/authentication", 
 	      {"templateUrl": "app/authentication.html",
 	       "controller" : "AuthenticationController"
 	      });
 
+  $routeProvider.when("/badges",
+	      {"templateUrl": "app/badges.html",
+	       "controller" : "BadgeController"
+	      });
 
-  $routeProvider.when("/users", 
-	      {"templateUrl": "app/users.html",
-	       "controller" : "UserController"
+ $routeProvider.when("/badges/add",
+	      {"templateUrl": "app/addBadge.html",
+	       "controller" : "BadgeController"
 	      });
 
   $routeProvider.otherwise(
-    {"templateUrl": "app/rfid.html",
-     "controller" : "RfidController"
+    {"templateUrl": "app/badges.html",
+     "controller" : "BadgeController"
     });
 });
-
-app.userName = "Happy";
