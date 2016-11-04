@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
  * This class is responsible for accepting a request and determining the authorization of a particular RFID device.
  * 
  * @author tdc
- *
  */
 @Controller
 @RequestMapping("/rfid")
@@ -25,13 +24,12 @@ public class RfidController {
 	}
 
 	@RequestMapping("/check")
-	public ResponseEntity<String> getRfidStatus(@RequestParam(name="badge_id", required=true) String badgeId,
-												@RequestParam(name="device_id", required=true) String deviceId) {
+	public ResponseEntity<String> getRfidStatus(@RequestParam(name="badge_id") String badgeId,
+												@RequestParam(name="device_id") String deviceId) {
 		int resp = ras.getAuthorizationStatus(badgeId, deviceId);
 		if (resp == DefaultRfidAuthorizationService.AUTHORIZED) {
-			return new ResponseEntity<String>("{\"response\": \"accept\"}", HttpStatus.OK);
+			return new ResponseEntity<>("{\"response\": \"accept\"}", HttpStatus.OK);
 		}
-		return new ResponseEntity<String>("{\"response\": \"deny\"}", HttpStatus.UNAUTHORIZED);
+		return new ResponseEntity<>("{\"response\": \"deny\"}", HttpStatus.UNAUTHORIZED);
 	}
-	
 }

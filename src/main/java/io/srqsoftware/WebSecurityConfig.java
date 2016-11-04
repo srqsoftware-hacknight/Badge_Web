@@ -29,7 +29,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()
                 .antMatchers("/", "/home", "/app/**", "/lib/**", "/style.css", "/rfid/**"
-//                		, "/**"
                 		).permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -48,13 +47,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .withUser("rfid").password("passw0rd").roles("USER");
     }
     
-    public class Send401ResponseEntryPoint implements AuthenticationEntryPoint {
-
+    private class Send401ResponseEntryPoint implements AuthenticationEntryPoint {
 		@Override
 		public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)
 				throws IOException, ServletException {
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
 		}
-    	
     }
 }
