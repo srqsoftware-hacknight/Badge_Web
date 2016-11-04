@@ -8,7 +8,6 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
  * The main entry point into a Spring Boot Application
  *
  * @author tdc
- *
  */
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer {

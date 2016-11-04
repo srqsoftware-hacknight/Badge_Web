@@ -27,9 +27,11 @@ public class RfidController {
 	public ResponseEntity<String> getRfidStatus(@RequestParam(name="badge_id") String badgeId,
 												@RequestParam(name="device_id") String deviceId) {
 		int resp = ras.getAuthorizationStatus(badgeId, deviceId);
+
 		if (resp == DefaultRfidAuthorizationService.AUTHORIZED) {
 			return new ResponseEntity<>("{\"response\": \"accept\"}", HttpStatus.OK);
 		}
+
 		return new ResponseEntity<>("{\"response\": \"deny\"}", HttpStatus.UNAUTHORIZED);
 	}
 }
