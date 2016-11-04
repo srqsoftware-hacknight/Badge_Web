@@ -28,8 +28,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     			.sameOrigin();
         http
             .authorizeRequests()
-                .antMatchers("/", "/home", "/app/**", "/lib/**"
-                		, "/**"
+                .antMatchers("/", "/home", "/app/**", "/lib/**", "/style.css", "/rfid/**"
+//                		, "/**"
                 		).permitAll()
                 .anyRequest().authenticated()
                 .and()

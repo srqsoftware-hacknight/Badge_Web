@@ -28,14 +28,6 @@ angular.module('fabLab.rfidCtrl',[])
     	)
     };
     $scope.loadData();
-    /*
-    $scope.devices = [
-      {"id": "123", "isEnabled": true, "owner": "Scott"},
-      {"id": "456", "isEnabled": true, "owner": "Chris"},
-      {"id": "789", "isEnabled": false, "owner": "Dick"},
-      {"id": "987", "isEnabled": true, "owner": "Eric"},
-    ];
-*/
 
     $scope.updateUser = function(x) {
       // Toggle the status of the user

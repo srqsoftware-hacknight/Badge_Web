@@ -24,23 +24,11 @@ public class DefaultUserService implements UserService {
 	}
 	
 	@Override
-	public long createUser(User x) {
-		KeyHolder holder = new GeneratedKeyHolder();
+	public String createUser(User x) {
+		String query = "insert into badges(RFID_ID, FIRST_NAME, LAST_NAME) values(?, ?, ?)";
+		jdbcTemplate.update(query, x.getRfidId(), x.getFirstName(), x.getLastName());
 
-		jdbcTemplate.update(new PreparedStatementCreator() {           
-
-		                @Override
-		                public PreparedStatement createPreparedStatement(Connection connection)
-		                        throws SQLException {
-		                    PreparedStatement ps = connection.prepareStatement("insert into badges(RFID_ID, FIRST_NAME, LAST_NAME) values(?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
-		                    ps.setString(1, x.getRfidId());
-		                    ps.setString(2, x.getFirstName());
-		                    ps.setString(3, x.getLastName());
-		                    return ps;
-		                }
-		            }, holder);
-
-		return holder.getKey().longValue();
+		return x.getRfidId();
 	}
 
 	@Override

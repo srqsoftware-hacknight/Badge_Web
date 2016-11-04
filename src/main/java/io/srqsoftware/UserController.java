@@ -49,13 +49,11 @@ public class UserController {
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<String> addUser(@RequestBody User user) {
-		// Require first name, last name, and the RFID identifier
 		if (!isValidUser(user)) {
 			return new ResponseEntity<String>("{\"response\": \"required parameter missing\"}", HttpStatus.NOT_ACCEPTABLE);
 		}
 		try {
-			long resp = us.createUser(user);
-			return new ResponseEntity<String>("{\"response\": \""+resp+"\"}", HttpStatus.CREATED);
+			return new ResponseEntity<String>("{\"response\": \""+us.createUser(user)+"\"}", HttpStatus.CREATED);
 		} catch(Exception e) {
 			return new ResponseEntity<String>("{\"response\": \""+e.getLocalizedMessage()+"\"}", HttpStatus.NOT_ACCEPTABLE);
 		}

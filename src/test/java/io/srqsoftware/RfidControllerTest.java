@@ -12,7 +12,7 @@ public class RfidControllerTest {
 	public void testRfidControllerNegative() {
 		RfidAuthorizationService ras = new UnauthorizedRfidAuthorizationService();
 		RfidController rc = new RfidController(ras);
-		ResponseEntity<String> re = rc.getRfidStatus(1234);
+		ResponseEntity<String> re = rc.getRfidStatus("1234", "1");
 		
 		assertEquals(re.getStatusCode(), HttpStatus.UNAUTHORIZED);
 		assertEquals(re.getBody(), "{\"response\": \"deny\"}");
@@ -22,7 +22,7 @@ public class RfidControllerTest {
 	public void testRfidControllerPositive() {
 		RfidAuthorizationService ras = new AuthorizedRfidAuthorizationService();
 		RfidController rc = new RfidController(ras);
-		ResponseEntity<String> re = rc.getRfidStatus(1234);
+		ResponseEntity<String> re = rc.getRfidStatus("1234","1");
 		
 		assertEquals(re.getStatusCode(), HttpStatus.OK);
 		assertEquals(re.getBody(), "{\"response\": \"accept\"}");
@@ -31,14 +31,14 @@ public class RfidControllerTest {
 
 	private static class UnauthorizedRfidAuthorizationService implements RfidAuthorizationService {
 		@Override
-		public int getAuthorizationStatus(int keyId) {
+		public int getAuthorizationStatus(String badge_id, String device_id) {
 			return RfidAuthorizationService.UNAUTHORIZED;
 		}
 	}
 	
 	private static class AuthorizedRfidAuthorizationService implements RfidAuthorizationService {
 		@Override
-		public int getAuthorizationStatus(int keyId) {
+		public int getAuthorizationStatus(String badge_id, String device_id) {
 			return RfidAuthorizationService.AUTHORIZED;
 		}
 	}

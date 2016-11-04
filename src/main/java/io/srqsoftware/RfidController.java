@@ -25,8 +25,9 @@ public class RfidController {
 	}
 
 	@RequestMapping("/check")
-	public ResponseEntity<String> getRfidStatus(@RequestParam(name="id", required=true) int keyId) {
-		int resp = ras.getAuthorizationStatus(keyId);
+	public ResponseEntity<String> getRfidStatus(@RequestParam(name="badge_id", required=true) String badgeId,
+												@RequestParam(name="device_id", required=true) String deviceId) {
+		int resp = ras.getAuthorizationStatus(badgeId, deviceId);
 		if (resp == DefaultRfidAuthorizationService.AUTHORIZED) {
 			return new ResponseEntity<String>("{\"response\": \"accept\"}", HttpStatus.OK);
 		}
