@@ -32,6 +32,7 @@
     <!-- Load any necessary controllers -->
     <script type="text/javascript" src="app/BadgeController.js"></script>
     <script type="text/javascript" src="app/AuthenticationController.js"></script>
+    <script type="text/javascript" src="app/LogInOutController.js"></script>
 
     <link rel="stylesheet" href="style.css">
 
@@ -45,8 +46,8 @@
       <h1>Suncoast Science Center Badge System</h1>
     </div>
 
-    <div>
-    <span class="badge-details">Hello, {{username}}!<br/><a ng-click="navToAuth()">Log In</a></span>
+    <div ng-controller="LogInOutController">
+    <span class="badge-details">Hello, {{curUser}}!<br/><a class="pointer" ng-click="toggleAuth()">{{logInOut}}</a></span>
     </div>
 
     <div>

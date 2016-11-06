@@ -1,6 +1,9 @@
 angular.module('fabLab.AuthenticationController',[])
-  .controller('AuthenticationController', function($scope, $http, $location, $mdToast) {
+  .controller('AuthenticationController', function($scope, $http, $location, $mdToast, $rootScope) {
     console.log("Auth ctrl");
+
+    var rootScope = $rootScope;
+
     $scope.username = "";
     $scope.password = "";
 
@@ -18,6 +21,7 @@ angular.module('fabLab.AuthenticationController',[])
         .then(function(res) {
         	$scope.showResults("User was authenticated");
           console.log($scope.username);
+          rootScope.$broadcast('loggedIn', $scope.username);
         	$location.path("badges");
         }, function(err) {
         	$scope.showResults("User authentication failed");

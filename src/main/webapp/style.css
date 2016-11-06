@@ -1,5 +1,9 @@
-.user-details {
+.badge-details {
     position: absolute;
     right: 10px;
     top: 10px;
+}
+
+.pointer {
+    cursor: pointer;
 }
