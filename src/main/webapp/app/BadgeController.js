@@ -84,6 +84,10 @@ angular.module('fabLab.BadgeController',[])
     };
 
     $scope.addBadge = function() {
+    	
+      if(!$scope.userForm.$valid) {
+          return;
+      }
       $scope.badge.status = 1;
       
       // If this is an edit, then update the existing user
