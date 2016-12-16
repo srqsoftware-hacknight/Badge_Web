@@ -35,19 +35,23 @@ http://localhost:8080
 
 # Creating a release and publishing to github
 
-1. Increment the project version in the pom.xml file.
-2. Create a github personal access token. Do not share this nor commit it.
-3. Modify your ~/.m2/settings.xml to include a server block similar to:
-
+* Increment the project version in the pom.xml file.
+* Create a github personal access token. Do not share this nor commit it.
+* Modify your ~/.m2/settings.xml to include a server block similar to:
 ```
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                          https://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <servers>
     <server>
       <id>github</id>
       <username>YOUR_USERNAME</username>
       <password>GH_TOKEN</password>
     </server>
   </servers>
+</settings>
 ```
-
-4. mvn clean package github-release-plugin:gh-upload
-5. Verify the release looks correct at: https://github.com/srqsoftware-hacknight/Badge_Web/releases
+* mvn clean package github-release-plugin:gh-upload
+* Verify the release looks correct at: https://github.com/srqsoftware-hacknight/Badge_Web/releases
 
