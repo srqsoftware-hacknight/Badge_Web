@@ -22,6 +22,11 @@ app.config(function($routeProvider) {
 	       "controller" : "BadgeController"
 	      });
 
+  $routeProvider.when("/badges/edit",
+	      {"templateUrl": "app/addBadge.html",
+	       "controller" : "BadgeController"
+	      });
+
   $routeProvider.otherwise(
     {"templateUrl": "app/badges.html",
      "controller" : "BadgeController"

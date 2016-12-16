@@ -9,12 +9,12 @@
     </thead>
     <tbody>
       <tr ng-repeat="d in devices">
-        <td>{{d.firstName}}</td>
+        <td><a class="pointer" ng-click="editUser(d)">{{d.firstName}}</a></td>
         <td>{{d.lastName}}</td>
         <td>{{d.badgeId}}</td>
         <td>{{d.phone}}</td>
         <td>{{d.email}}</td>
-        <td><a class="pointer" ng-click="updateBadge(d)">Deactivate</a></td>
+        <td><a class="pointer" ng-click="toggleBadge(d)">Deactivate</a></td>
       </tr>
     </tbody>
   </table>

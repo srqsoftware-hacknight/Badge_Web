@@ -44,7 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
             .inMemoryAuthentication()
-                .withUser("rfid").password("passw0rd").roles("USER");
+                .withUser("badge").password("passw0rd").roles("USER");
     }
     
     private class Send401ResponseEntryPoint implements AuthenticationEntryPoint {

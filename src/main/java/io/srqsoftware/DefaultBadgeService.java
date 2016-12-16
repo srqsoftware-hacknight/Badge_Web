@@ -39,8 +39,24 @@ public class DefaultBadgeService implements BadgeService {
 	}
 
 	@Override
-	@Transactional
 	public void updateBadge(Badge badge) {
+		String updateQuery = "update badges set first_name = ?, last_name = ?, email = ?, phone = ? where badge_id = ?";
+		jdbcTemplate.update(updateQuery, badge.getFirstName(), badge.getLastName(),
+				badge.getEmail(), badge.getPhone(), badge.getBadgeId());
+
+		LOGGER.info("Updated badge with ID: " + badge.getBadgeId());
+
+	}
+
+	@Override
+	public Badge getBadge(String badgeId) {
+		String query = "select * from badges where badge_id = ?";
+		return jdbcTemplate.queryForObject(query, new String[] {badgeId}, new BadgeRowMapper());
+	}
+
+	@Override
+	@Transactional
+	public void deactivateBadge(Badge badge) {
 		String archiveQuery = "insert into badges_history(return_date, badge_id, first_name, last_name, email, phone, issued_date) values (?, ?, ?, ?, ?, ?, ?)";
 		jdbcTemplate.update(archiveQuery, new Date(), badge.getBadgeId(), badge.getFirstName(), badge.getLastName(),
 				badge.getEmail(), badge.getPhone(), badge.getIssuedDate());

@@ -37,8 +37,25 @@ public class BadgeController {
 				(badge.getFirstName().length() < 1) || (badge.getLastName().length() < 1) || (badge.getBadgeId().length() < 3));
 	}
 
-	@RequestMapping(path = "/badges", method=RequestMethod.PUT)
+	@RequestMapping(path = "/badges/deactivate", method=RequestMethod.PUT)
 	public ResponseEntity<String> deactivateBadge(@RequestBody Badge badge) {
+		if (!validateBadge(badge)) {
+			return new ResponseEntity<>("{\"response\": \"required parameter missing\"}", HttpStatus.NOT_ACCEPTABLE);
+		}
+
+		try {
+			us.deactivateBadge(badge);
+
+			return new ResponseEntity<>("{\"response\": \""+ badge.getBadgeId()+"\"}", HttpStatus.ACCEPTED);
+		} catch(Exception e) {
+			LOGGER.error("Deactivating badge: " + badge.getBadgeId() + " failed", e);
+
+			return new ResponseEntity<>("{\"response\": \""+e.getLocalizedMessage()+"\"}", HttpStatus.NOT_ACCEPTABLE);
+		}
+	}
+
+	@RequestMapping(path = "/badges", method=RequestMethod.PUT)
+	public ResponseEntity<String> updateBadge(@RequestBody Badge badge) {
 		if (!validateBadge(badge)) {
 			return new ResponseEntity<>("{\"response\": \"required parameter missing\"}", HttpStatus.NOT_ACCEPTABLE);
 		}
@@ -48,11 +65,12 @@ public class BadgeController {
 
 			return new ResponseEntity<>("{\"response\": \""+ badge.getBadgeId()+"\"}", HttpStatus.ACCEPTED);
 		} catch(Exception e) {
-			LOGGER.error("Deactivating badge: " + badge.getBadgeId() + " failed", e);
+			LOGGER.error("Updating badge: " + badge.getBadgeId() + " failed", e);
 
 			return new ResponseEntity<>("{\"response\": \""+e.getLocalizedMessage()+"\"}", HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
+
 	
 	@RequestMapping(path = "/badges", method=RequestMethod.POST)
 	public ResponseEntity<String> addBadge(@RequestBody Badge badge) {
@@ -68,7 +86,12 @@ public class BadgeController {
 			return new ResponseEntity<>("{\"response\": \""+e.getLocalizedMessage()+"\"}", HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
-	
+
+	@RequestMapping(path = "/badges", method = RequestMethod.GET)
+	public ResponseEntity<Badge> getBadge(@RequestParam(name="badge_id") String badgeId) {
+		return new ResponseEntity<>(us.getBadge(badgeId), HttpStatus.OK);
+    }
+
 	@RequestMapping(path = "/badges/list")
 	public ResponseEntity<List<Badge>> listBadges() {
 		return new ResponseEntity<>(us.getAllBadges(), HttpStatus.OK);

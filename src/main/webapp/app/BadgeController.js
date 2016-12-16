@@ -1,6 +1,28 @@
 angular.module('fabLab.BadgeController',[])
-  .controller('BadgeController', function($scope, $location, $http, $mdToast) {
+  .controller('BadgeController', function($scope, $location, $http, $mdToast, $routeParams) {
 
+	  
+	// Check to see if this is an edit or a create
+	var curBadgeId = ((""+$routeParams.id) == "undefined") ? "" : $routeParams.id;
+	console.log("Route params: " + curBadgeId);
+
+	$scope.badge = {};
+    $scope.badge.firstName = "";
+    $scope.badge.lastName = "";
+    $scope.curAction = "Add Badge";
+	
+    if (curBadgeId != "") {
+        $scope.curAction = "Update Badge";
+    	
+    	$http.get("/badges?badge_id="+curBadgeId)
+    	.then(function(res) {
+    		$scope.badge = res.data;
+    	},
+    	function(err) {
+    		console.log("ERROR: " + JSON.stringify(err));
+    	})
+    }
+    
     $scope.showResults = function(txt) {
     	$mdToast.show(
     			$mdToast.simple()
@@ -14,6 +36,12 @@ angular.module('fabLab.BadgeController',[])
     	$location.path("badges/add");
     };
 
+    $scope.editUser = function(x) {
+    	console.log("Update the selected user");
+    	$location.path("badges/edit").search({'id':x.badgeId});
+    };
+
+
     $scope.loadData = function() {
     	$http.get("/badges/list")
     	.then(function(res) {
@@ -24,28 +52,24 @@ angular.module('fabLab.BadgeController',[])
     	})
     };
 
-    $scope.badge = {};
-    $scope.badge.firstName = "";
-    $scope.badge.lastName = "";
 
     $scope.loadData();
 
-    $scope.updateBadge = function(x) {
+    $scope.toggleBadge = function(x) {
       if (x.status == 1) {
         x.status = 0;
       } else {
         x.status = 1;
       }
 
-    	$http({"method": "PUT", "url":"/badges", "data": x, "withCredentials":true})
-        .then(function(res) {
-        	$scope.showResults("Badge was successfully deactivated");
-          $scope.loadData();
-        }, function(err) {
-        	console.log("Bad badge update: " + JSON.stringify(err));
-        	$scope.showResults("Error adding the badge: " + err.data.response);
-        }
-      );
+	  	$http({"method": "PUT", "url":"/badges/deactivate", "data": x, "withCredentials":true})
+	    .then(function(res) {
+	    	$scope.showResults("Badge was successfully updated");
+	      $scope.loadData();
+	    }, function(err) {
+	    	console.log("Bad badge update: " + JSON.stringify(err));
+	    	$scope.showResults("Error adding the badge: " + err.data.response);
+	    });
     };
 
     $scope.logUserOut = function() { 
@@ -61,7 +85,21 @@ angular.module('fabLab.BadgeController',[])
 
     $scope.addBadge = function() {
       $scope.badge.status = 1;
-    	$http({"method": "POST", "url":"/badges", "data": $scope.badge, "withCredentials":true})
+      
+      // If this is an edit, then update the existing user
+      if (curBadgeId != "") {
+      	$http({"method": "PUT", "url":"/badges", "data": $scope.badge, "withCredentials":true})
+        .then(function(res) {
+        	$scope.showResults("Badge was successfully updated");
+            $location.path("badges").search({});
+        }, function(err) {
+        	console.log("Bad badge update: " + JSON.stringify(err));
+        	$scope.showResults("Error adding the badge: " + err.data.response);
+        }
+      );
+          $location.path("badges").search({});
+      } else {
+      	$http({"method": "POST", "url":"/badges", "data": $scope.badge, "withCredentials":true})
         .then(function(res) {
         	$scope.showResults("Badge was successfully added");
         	$scope.badge = {};
@@ -71,5 +109,7 @@ angular.module('fabLab.BadgeController',[])
         	$scope.showResults("Error adding the badge: " + err.data.response);
         }
       );
+      }
+       
     };
   });
