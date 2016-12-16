@@ -74,7 +74,7 @@ public class BadgeController {
 		return new ResponseEntity<>(us.getAllBadges(), HttpStatus.OK);
     }
 
-	@RequestMapping(path = {"/rfid/check", "/device/check"}, method = RequestMethod.GET)
+	@RequestMapping(path = "/device/check", method = RequestMethod.GET)
 	public ResponseEntity<String> checkBadgeAuthorization(@RequestParam(name="badge_id") String badgeId,
 														  @RequestParam(name="device_id") String deviceId) {
 		int resp = bas.getAuthorizationStatus(badgeId, deviceId);
