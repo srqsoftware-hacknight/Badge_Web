@@ -9,7 +9,7 @@
   <artifactId>badge-web</artifactId>
   <!-- Packaging should be either war or jar -->
   <packaging>jar</packaging>
-  <version>0.1.0</version>
+  <version>0.1.1</version>
 
   <properties>
     <java.version>1.8</java.version>
@@ -81,9 +81,36 @@
           <target>1.8</target>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>cy.github</groupId>
+        <artifactId>github-release-plugin</artifactId>
+        <version>0.5.1</version>
 
+        <configuration>
+          <serverId>github</serverId>
+          <endpointURL>https://api.github.com</endpointURL>
+          <repository>Badge_Web</repository>
+          <tagName>${project.version}</tagName>
+          <releaseTitle>${project.version}</releaseTitle>
+          <preRelease>false</preRelease>
+        </configuration>
+
+        <executions>
+          <execution>
+            <goals>
+              <goal>gh-upload</goal>
+            </goals>
+            <phase>deploy</phase>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
+
+  <scm>
+    <connection>scm:git:git@github.com:srqsoftware-hacknight/Badge_Web.git</connection>
+    <tag>${project.artifactId}-${project.version}</tag>
+  </scm>
 
   <repositories>
     <repository>
@@ -96,6 +123,14 @@
     <pluginRepository>
       <id>spring-releases</id>
       <url>https://repo.spring.io/libs-release</url>
+    </pluginRepository>
+    <pluginRepository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>bintray-cy6ergn0m-maven</id>
+      <name>bintray-plugins</name>
+      <url>http://dl.bintray.com/cy6ergn0m/maven</url>
     </pluginRepository>
   </pluginRepositories>
 </project>

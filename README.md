@@ -33,3 +33,21 @@ Steps for building the project:
 http://localhost:8080
 7. Run the web unit tests by navigating to the test directory and typing: `karma start`
 
+# Creating a release and publishing to github
+
+1. Increment the project version in the pom.xml file.
+2. Create a github personal access token. Do not share this nor commit it.
+3. Modify your ~/.m2/settings.xml to include a server block similar to:
+
+```
+    <server>
+      <id>github</id>
+      <username>YOUR_USERNAME</username>
+      <password>GH_TOKEN</password>
+    </server>
+  </servers>
+```
+
+4. mvn clean package github-release-plugin:gh-upload
+5. Verify the release looks correct at: https://github.com/srqsoftware-hacknight/Badge_Web/releases
+
