@@ -6,7 +6,7 @@
 
   <!-- Group ID and artifact ID should make this unique -->
   <groupId>io.srqsoftware</groupId>
-  <artifactId>rfid-web</artifactId>
+  <artifactId>badge-web</artifactId>
   <!-- Packaging should be either war or jar -->
   <packaging>jar</packaging>
   <version>0.1.0</version>

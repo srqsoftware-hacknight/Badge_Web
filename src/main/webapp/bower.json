@@ -6,7 +6,7 @@
   "description": "The description goes here",
   "main": "index.html",
   "keywords": [
-    "rfid"
+    "badge"
   ],
   "license": "MIT",
   "ignore": [
