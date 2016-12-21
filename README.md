@@ -18,7 +18,7 @@ If you're using a Mac, the best way to install the prerequisites is via brew. On
 Steps for building the project:
 
 1. Clone the repository (via git)
-2. Navigate to the directory RFID_Web
+2. Navigate to the directory Badge_Web
 3. Install bower and npm related dependencies.
     - `npm install -g bower`
     - Navigate to the src/main/webapp directory and type the following:
