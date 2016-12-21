@@ -28,7 +28,7 @@ Steps for building the project:
     - `npm install -g phantomjs`
     - `npm install -g karma-phantomjs-launcher`
 4. Navigate back to the root directory and type `mvn clean package`
-5. To run the code, type: `java -jar target/badge-web-VERSION.jar`
+5. To run the code, type: `java -jar target/badge-web-VERSION.war`
 6. Launch the following url:
 http://localhost:8080
 7. Run the web unit tests by navigating to the test directory and typing: `karma start`
