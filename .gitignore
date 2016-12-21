@@ -6,3 +6,4 @@ node_modules/
 src/main/webapp/lib
 .idea
 *.iml
+.DS_Store
