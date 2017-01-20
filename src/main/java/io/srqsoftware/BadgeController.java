@@ -24,11 +24,14 @@ public class BadgeController {
 
 	private final BadgeService us;
 	private final BadgeAuthorizationService bas;
+	private final PinService ps;
+
 	
 	@Autowired
-	public BadgeController(BadgeService us, BadgeAuthorizationService bas) {
+	public BadgeController(BadgeService us, BadgeAuthorizationService bas, PinService ps) {
 		this.us = us;
 		this.bas = bas;
+		this.ps = ps;
 	}
 
 	private boolean validateBadge(Badge badge) {
@@ -100,9 +103,11 @@ public class BadgeController {
 	@RequestMapping(path = "/device/check", method = RequestMethod.GET)
 	public ResponseEntity<String> checkBadgeAuthorization(@RequestParam(name="badge_id") String badgeId,
 														  @RequestParam(name="device_id") String deviceId) {
+		
 		int resp = bas.getAuthorizationStatus(badgeId, deviceId);
-
+		
 		if (resp == DefaultBadgeAuthorizationService.AUTHORIZED) {
+			ps.toggleDoor();
 			return new ResponseEntity<>("{\"response\": \"accept\"}", HttpStatus.OK);
 		}
 

@@ -57,6 +57,12 @@
       <artifactId>h2</artifactId>
 	</dependency>
 
+	<dependency>
+		<groupId>com.pi4j</groupId>
+		<artifactId>pi4j-core</artifactId>
+		<version>1.1</version>
+	</dependency>
+
     <!-- Unit test support -->
     <dependency>
       <groupId>junit</groupId>

@@ -10,7 +10,8 @@ public class BadgeControllerTest {
 	@Test
 	public void testBadgeAuthNegative() {
 		BadgeAuthorizationService ras = new UnauthorizedBadgeAuthorizationService();
-		BadgeController bc = new BadgeController(null, ras);
+		PinService ps = new FakePinService();
+		BadgeController bc = new BadgeController(null, ras, ps);
 		ResponseEntity<String> re = bc.checkBadgeAuthorization("1234", "1");
 		
 		assertEquals(re.getStatusCode(), HttpStatus.UNAUTHORIZED);
@@ -20,7 +21,8 @@ public class BadgeControllerTest {
 	@Test
 	public void testBadgeAuthPositive() {
 		BadgeAuthorizationService ras = new AuthorizedBadgeAuthorizationService();
-		BadgeController bc = new BadgeController(null, ras);
+		PinService ps = new FakePinService();
+		BadgeController bc = new BadgeController(null, ras, ps);
 		ResponseEntity<String> re = bc.checkBadgeAuthorization("1234","1");
 		
 		assertEquals(re.getStatusCode(), HttpStatus.OK);
@@ -40,4 +42,12 @@ public class BadgeControllerTest {
 			return BadgeAuthorizationService.AUTHORIZED;
 		}
 	}
+	
+	private static class FakePinService implements PinService {
+		@Override
+		public void toggleDoor() {
+			
+		}
+	}
+
 }
