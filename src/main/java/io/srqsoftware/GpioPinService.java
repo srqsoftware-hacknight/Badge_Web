@@ -16,7 +16,7 @@ public class GpioPinService implements PinService {
 	
 	public GpioPinService() {
 		gpio = GpioFactory.getInstance();		
-		pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_01, "Door", PinState.HIGH);
+		pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_18, "Door", PinState.HIGH);
 	}
 	
 	@Override
