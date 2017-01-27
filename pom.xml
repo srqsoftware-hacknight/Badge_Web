@@ -9,7 +9,7 @@
   <artifactId>badge-web</artifactId>
   <!-- Packaging should be either war or jar -->
   <packaging>war</packaging>
-  <version>0.1.6</version>
+  <version>0.1.7</version>
 
   <properties>
     <java.version>1.8</java.version>
@@ -55,12 +55,6 @@
 	<dependency>
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
-	</dependency>
-
-	<dependency>
-		<groupId>com.pi4j</groupId>
-		<artifactId>pi4j-core</artifactId>
-		<version>1.1</version>
 	</dependency>
 
     <!-- Unit test support -->

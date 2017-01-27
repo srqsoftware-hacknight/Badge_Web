@@ -24,14 +24,12 @@ public class BadgeController {
 
 	private final BadgeService us;
 	private final BadgeAuthorizationService bas;
-	private final PinService ps;
 
 	
 	@Autowired
-	public BadgeController(BadgeService us, BadgeAuthorizationService bas, PinService ps) {
+	public BadgeController(BadgeService us, BadgeAuthorizationService bas) {
 		this.us = us;
 		this.bas = bas;
-		this.ps = ps;
 	}
 
 	private boolean validateBadge(Badge badge) {
@@ -107,7 +105,6 @@ public class BadgeController {
 		int resp = bas.getAuthorizationStatus(badgeId, deviceId);
 		
 		if (resp == DefaultBadgeAuthorizationService.AUTHORIZED) {
-			ps.toggleDoor();
 			return new ResponseEntity<>("{\"response\": \"accept\"}", HttpStatus.OK);
 		}
 
