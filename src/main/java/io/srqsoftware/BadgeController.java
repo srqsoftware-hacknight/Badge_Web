@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -87,6 +89,29 @@ public class BadgeController {
 			return new ResponseEntity<>("{\"response\": \""+e.getLocalizedMessage()+"\"}", HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
+
+	@RequestMapping(path = "/adminpw", method=RequestMethod.POST)
+	public ResponseEntity<String> addAdminPassword(@RequestBody User user) {
+		if ((user== null) || (user.getPassword() == null) || (user.getPassword().length() < 1)) {
+			return new ResponseEntity<>("{\"response\": \"required parameter missing\"}", HttpStatus.NOT_ACCEPTABLE);
+		}
+
+		User adminUser = new User();
+		adminUser.setUserName("admin");
+		adminUser.setPassword(encoder().encode(user.getPassword()));
+
+		boolean rc = us.initAdmin(adminUser.getPassword());
+		if (rc) {
+			return new ResponseEntity<>("{\"response\": \"success\"}", HttpStatus.CREATED);
+		} else {
+			return new ResponseEntity<>("{\"response\": \"failure\"}", HttpStatus.NOT_ACCEPTABLE);
+		}
+	}
+
+	private PasswordEncoder encoder() {
+		return new BCryptPasswordEncoder(11);
+	}
+
 
 	@RequestMapping(path = "/badges", method = RequestMethod.GET)
 	public ResponseEntity<Badge> getBadge(@RequestParam(name="badge_id") String badgeId) {

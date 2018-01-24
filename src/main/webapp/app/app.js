@@ -1,5 +1,5 @@
 var app = angular.module('BadgeApplication', ['ngRoute', 'ngMaterial',
-						'fabLab.BadgeController', 'fabLab.AuthenticationController', 'fabLab.LogInOutController']);
+						'fabLab.BadgeController', 'fabLab.AuthenticationController', 'fabLab.AdminController', 'fabLab.LogInOutController']);
 
 app.config(function($routeProvider) {
   $routeProvider.when("/authentication", 
@@ -7,9 +7,9 @@ app.config(function($routeProvider) {
 	       "controller" : "AuthenticationController"
 	      });
 
-  $routeProvider.when("/authentication",
-	      {"templateUrl": "app/authentication.html",
-	       "controller" : "AuthenticationController"
+  $routeProvider.when("/admin",
+	      {"templateUrl": "app/admin.html",
+	       "controller" : "AdminController"
 	      });
 
   $routeProvider.when("/badges",
