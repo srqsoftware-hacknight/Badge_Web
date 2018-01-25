@@ -55,6 +55,19 @@ public class DefaultBadgeService implements BadgeService {
 	}
 
 	@Override
+	public boolean initAdmin(String pw) {
+		String query = "insert into users(username, password) values(?, ?)";
+		try {
+			jdbcTemplate.update(query, "admin", pw);
+			LOGGER.info("Created admin password");
+			return true;
+		} catch(Exception e) {
+			LOGGER.error("Error creating admin password");
+			return false;
+		}
+	}
+
+	@Override
 	@Transactional
 	public void deactivateBadge(Badge badge) {
 		String archiveQuery = "insert into badges_history(return_date, badge_id, first_name, last_name, email, phone, issued_date) values (?, ?, ?, ?, ?, ?, ?)";

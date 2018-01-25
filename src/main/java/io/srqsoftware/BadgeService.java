@@ -8,4 +8,5 @@ public interface BadgeService {
 	void deactivateBadge(Badge badge);
 	List<Badge> getAllBadges();
 	Badge getBadge(String badgeId);
+	boolean initAdmin(String pw);
 }
