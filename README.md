@@ -30,9 +30,9 @@ Steps for building the project:
 4. Navigate back to the root directory and type `mvn clean package`
 5. To run the code, type: `java -jar target/badge-web-VERSION.war`
 Note: To run the code in test, type: `java -jar -Dspring.profiles.active=test target/badge-web-VERSION.war`
-6. Launch the following url:
-http://localhost:8080
-7. Run the web unit tests by navigating to the test directory and typing: `karma start`
+6. Launch the following url: http://localhost:8080
+7. If this is the first time the application has been started, navigate to: http://localhost:8080/#!/admin to set an admin password. You will then be redirected to the login page to login with the admin credentials that were created.
+8. Run the web unit tests by navigating to the test directory and typing: `karma start`
 
 # Creating a release and publishing to github
 
